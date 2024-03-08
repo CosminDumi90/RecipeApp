@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Recipe Book</a>
+        <a class="navbar-brand" routerLink="/recipes">Recipe Book</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -15,9 +15,14 @@
                         aria-current="page">Recipes</a>
                 </li>
                 <li routerLinkActive="active" class="nav-item">
+
                     <a routerLink="/shopping-list"
                         class="nav-link">Shopping
                         List</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/auth"
+                        class="nav-link">Authenticate</a>
                 </li>
                 <li class="nav-item dropdown" appDropdown #drop="appDropDown">
                     <a class="nav-link dropdown-toggle"
@@ -27,10 +32,12 @@
                     </a>
                     <ul class="dropdown-menu" [ngClass]="{'show':drop.isOpen}">
                         <li><a class="dropdown-item"
-                                style="cursor: pointer;">Saving
+                                style="cursor: pointer;"
+                                (click)="onSaveData()">Save
                                 Data</a></li>
                         <li><a class="dropdown-item"
-                                style="cursor: pointer;">Fetching Data
+                                style="cursor: pointer;"
+                                (click)="onFetchData()">Fetch Data
                             </a></li>
                     </ul>
                 </li>
