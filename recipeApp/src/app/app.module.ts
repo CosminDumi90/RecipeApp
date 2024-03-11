@@ -16,9 +16,12 @@ import { AppRountingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth/auth.component';
-
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { AuthComponent } from './auth/auth/auth.component';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
+    LoadingSpinnerComponent,
+    AlertComponent,
+    PlaceHolderDirective,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,15 @@ import { AuthComponent } from './auth/auth/auth.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [
+    ShoppingListService,
+    RecipeService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
