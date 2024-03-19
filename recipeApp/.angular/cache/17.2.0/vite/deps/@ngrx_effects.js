@@ -6,7 +6,7 @@ import {
   StoreFeatureModule,
   StoreRootModule,
   createAction
-} from "./chunk-M2XOX6CV.js";
+} from "./chunk-MDFSRNJZ.js";
 import {
   ENVIRONMENT_INITIALIZER,
   ErrorHandler,

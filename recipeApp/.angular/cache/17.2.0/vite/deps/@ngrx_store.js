@@ -46,7 +46,7 @@ import {
   select,
   setNgrxMockEnvironment,
   union
-} from "./chunk-M2XOX6CV.js";
+} from "./chunk-MDFSRNJZ.js";
 import "./chunk-CYOHBHH7.js";
 import "./chunk-SAVXX6OM.js";
 import "./chunk-SG3BCSKH.js";
