@@ -28,8 +28,8 @@ export class AuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean | UrlTree> {
     return this.store.select('auth').pipe(
       take(1),
-      map(authState => {
-        return authState.stateUser;
+      map((authState) => {
+        return authState.user;
       }),
       map((user) => {
         const isAuth = !!user; //!user ? false :true

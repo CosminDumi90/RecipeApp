@@ -1,18 +1,24 @@
+import { act } from '@ngrx/effects';
 import { User } from '../user.model';
 import * as AllAuthActions from './auth.actions';
 
 export interface State {
-  stateUser: User;
+  user: User;
+  authError: string;
+  loading: boolean;
 }
-const initialState: State = { stateUser: null };
+const initialState: State = {
+  user: null,
+  authError: null,
+  loading: false,
+};
+
 export function authReducer(
   state = initialState,
   action: AllAuthActions.AuthActions
 ) {
-  console.log(state);
-  
   switch (action.type) {
-    case AllAuthActions.LOGIN:
+    case AllAuthActions.AUTHENTICATE_SUCCESS:
       const user = new User(
         action.payload.email,
         action.payload.userId,
@@ -21,10 +27,34 @@ export function authReducer(
       );
       return {
         ...state,
-        stateUser: user,
+        authError: null,
+        user: user,
+        loading: false,
       };
     case AllAuthActions.LOGOUT:
-      return { ...state, stateUser: null };
+      return {
+        ...state,
+        user: null,
+      };
+    case AllAuthActions.LOGIN_START:
+    case AllAuthActions.SIGNUP_START:
+      return {
+        ...state,
+        authError: null,
+        loading: true,
+      };
+    case AllAuthActions.AUTHENTICATE_FAIL:
+      return {
+        ...state,
+        user: null,
+        authError: action.payload,
+        loading: false,
+      };
+    case AllAuthActions.CLEAR_ERROR:
+      return {
+        ...state,
+        authError: null,
+      };
     default:
       return state;
   }
